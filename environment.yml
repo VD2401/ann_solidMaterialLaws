@@ -1,0 +1,11 @@
+name: LSMS
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - conda-forge::numpy=1.21.*
+  - pytorch::pytorch
+  - torchaudio
+  - torchvision
+  - matplotlib
+  - ipykernel

@@ -1,6 +1,6 @@
 For tomorrow morning:
-- Add loop inside the training loop for each datafile
-- Run the model on two datasets
+- Add loop inside the training loop for each datafile DONE
+- Run the model on two datasets DONE
 - Run the model on more datasets
 - Establish a technique for data augmentation
 - Produce function to visualize i^th slice for looking inside 3D block

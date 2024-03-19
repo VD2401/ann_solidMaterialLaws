@@ -48,3 +48,10 @@ U_net_shape = 1-4-8-16-32-64
 batch_size = 8
 split_ratio = 0.875
 learning_rate = 0.001
+
+8)
+N_samples = 256
+U_net_shape = 1-4-8-16-32-64
+batch_size = 16
+split_ratio = 0.75
+learning_rate = 0.001

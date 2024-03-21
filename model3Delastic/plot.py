@@ -220,4 +220,23 @@ def plot_ITO(input, target, output, n, axis, **kwargs):
     ax.set_aspect('equal')
     fig.colorbar(mesh)
     plt.show()
+    # plot error between target and output
+    error = (target - output).abs().cpu()
+    fig = plt.figure(figsize=(10, 8))
+    ax = plt.axes()
+    colormap = kwargs.get('cmap', 'jet')
+    error_min = kwargs.get('vmin', error.min())
+    error_max = kwargs.get('vmax', error.max())
+    cmap = plt.get_cmap(colormap, 1024)
+    if axis == 0:
+        slice = error[n, :, :]
+    elif axis == 1:
+        slice = error[:, n, :]
+    elif axis == 2:
+        slice = error[:, :, n]
+    mesh = plt.pcolormesh(slice, cmap=cmap, vmin=error_min, vmax=error_max)
+    ax.set(xlabel='X', ylabel='Y')
+    ax.set_aspect('equal')
+    fig.colorbar(mesh)
+    plt.show()
     

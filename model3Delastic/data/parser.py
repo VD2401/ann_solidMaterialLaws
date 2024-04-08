@@ -10,6 +10,8 @@ class Parser:
         self.parser.add_argument('--n_samples', type=int, help='Number of samples for the simulation. Mandatory.', required=True)
         self.parser.add_argument('--n_epochs', type=int, help='Number of epochs for the simulation. Default is 1000.', default=1000)
         self.parser.add_argument('--stress_number', type=int, help='Number of the stress for the simulation. Default is 0.', default=0)
+        self.parser.add_argument('--load_number', type=int, help='Number of the load for the simulation. Default is 0.', default=0)
+        self.parser.add_argument('--augment', type=int, help='Augment the data. Default is False.', default=0)
         self.parser.add_argument('--retrain', type=bool, help='Retrain the model. Default is False.', default=False)
         self.parser.add_argument('--model_name', type=str, help='Name of the model. If --retrain is False: set to None. Else: Mandatory.', default=None)
         self.parser.add_argument('--data_path', type=str, help='Path to the data. Mandatory.', default='data/')
@@ -26,6 +28,10 @@ class Parser:
         if self.args['stress_number'] < 0 or self.args['stress_number'] > 5:
             raise ValueError('The stress number must be between 0 and 5')
         
+        # Check that the load number is correct
+        if self.args['load_number'] < 0 or self.args['load_number'] > 5:
+            raise ValueError('The load number must be between 0 and 5')
+        
         # Check that the model name is correct
         if self.args['retrain']:
             if self.args['model_name'] is None:
@@ -38,6 +44,11 @@ class Parser:
         # Check that the data path is correct. The data_path should lead to a folder with at least one file "data_elasticity_3D_128_0.pt".
         if not os.path.exists(self.args['data_path'] + 'data_elasticity_3D_128_0.pt'):
             raise ValueError('The data path must lead to a folder with at least one file "data_elasticity_3D_128_0.pt"')
+        
+        # Check that number of file to be augmented exists
+        if self.args['augment']:
+            if not os.path.exists(self.args['data_path'] + f'data_elasticity_3D_128_{self.args['augment']}.pt'):
+                raise ValueError(f'The data path must lead to a folder with "data_elasticity_3D_128_{self.args['augment']}.pt"')
         
         
     def get_args(self):
@@ -54,6 +65,12 @@ class Parser:
     
     def get_stress_number(self):
         return self.args['stress_number']
+    
+    def get_load_number(self):
+        return self.args['load_number']
+    
+    def get_augment(self):
+        return self.args['augment']
     
     def get_retrain(self):
         return self.args['retrain']

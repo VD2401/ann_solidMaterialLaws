@@ -10,6 +10,7 @@ def main():
     print(f"Number of epochs: {parser.get_n_epochs()}")
     print(f"Stress number: {parser.get_stress_number()}")
     print(f"Load number: {parser.get_load_number()}")
+    print(f"Augment: {parser.get_augment()}")
     print(f"Model name: {parser.get_model_name()}")
     print(f"Data path: {parser.get_data_path()}\n")
     

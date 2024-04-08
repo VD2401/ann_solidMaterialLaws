@@ -1,8 +1,11 @@
 # Data folder
-model2Delastic/data/
-model3Delastic/data/
-model3Delastic/test_parameters/output_image/
-model3Delastic/test_parameters/training/
+model2Delastic/data/*
+model3Delastic/data/data_files/*
+model3Delastic/test_parameters/output_image/*
+model3Delastic/test_parameters/output_slice/*
+model3Delastic/test_parameters/learning/*
+
+model3Delastic/test_parameters/training/*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

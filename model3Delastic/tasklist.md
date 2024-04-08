@@ -1,9 +1,16 @@
-For tomorrow morning:
-- Add loop inside the training loop for each datafile DONE
-- Run the model on two datasets DONE
-- Run the model on more datasets
-- Establish a technique for data augmentation
-- Produce function to visualize i^th slice for looking inside 3D block
-- Establish definition of function for evaluation of the divergence of the stress
-- Produce function to visualize the divergence of the stress from the model
-- Produce a function to compare the divergence of the stress from the model with the divergence of the stress from the data
+- Reorganise repository
+- Create class for Parser
+DONE
+- Create class for Datahandling
+DONE
+- Create class for Data Augmentation
+DONE
+- Create class for Model
+DONE
+- Create class for Training-Testing
+DONE
+- Script1: Simulate for 5 datafiles until convergence (loss difference over epochs). Get the number of epochs.
+- Script2: Simulate for N samples until convergence. Plot the final loss as a function of N.
+- Script3: Simulate for N samples until convergence with a fraction f of independent samples and 1-f of transformed data
+- Send bash_script.sh, setup.md, scripts, subfolder organisation
+- Cloud computing setup 

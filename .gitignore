@@ -11,6 +11,7 @@ model3Delastic/test_parameters/training/*
 __pycache__/
 *.py[cod]
 *$py.class
+*.DS_Store
 
 # C extensions
 *.so

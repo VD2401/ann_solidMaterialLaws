@@ -5,33 +5,26 @@ from model.training import TrainerTester
 
 def main():
     parser = Parser()
-    print("Arguments of parser are: ", parser.get_args())
-    print("Parser is: ", parser.get_parser())
-    print("Number of samples: ", parser.get_n_samples())
-    print("Number of epochs: ", parser.get_n_epochs())
-    print("Stress number: ", parser.get_stress_number())
-    print("Retrain: ", parser.get_retrain())
-    print("Model name: ", parser.get_model_name())
-    print("Data path: ", parser.get_data_path())
+    print(f"Arguments of parser are: {parser.get_args()}")
+    print(f"Number of samples: {parser.get_n_samples()}")
+    print(f"Number of epochs: {parser.get_n_epochs()}")
+    print(f"Stress number: {parser.get_stress_number()}")
+    print(f"Load number: {parser.get_load_number()}")
+    print(f"Model name: {parser.get_model_name()}")
+    print(f"Data path: {parser.get_data_path()}\n")
     
     dataset = Dataset(parser.get_data_path(), n_samples=parser.get_n_samples(), stress_number=parser.get_stress_number(), load_number=0, augment=0)
-    print("Data path of dataset is: ", dataset.data_path)
-    print("Device of dataset is: ", dataset.device)
-    print("Number of samples of dataset is: ", dataset.n_samples)
-    print("Stress number of dataset is: ", dataset.stress_number)
-    print("Load number of dataset is: ", dataset.load_number)
-    print("Maxfile of dataset is: ", dataset._maxfile)
-    
+
+    print(f"Dataset is created with {dataset.n_samples} samples, stress number {dataset.stress_number} and load number {dataset.load_number}.\n")
     if dataset.augment:
         dataset.augmentate()
         print("Augmentation of dataset is done.")
     dataset.load_data()
     print("Data of dataset is loaded.")
-    
-    print("Length of dataset is: ", len(dataset))
-    print("Item 0 of dataset is: ", dataset[0])
+    print(f"Lenght of dataset: {len(dataset)}\n")
     
     model = UNet3D()
+    print(f"Type of model: UNet3D with activation function LeakyReLU.")
     
     training = TrainerTester(model, dataset)
     print("Training infrastructure is set.")

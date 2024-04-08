@@ -2,6 +2,8 @@ from data.parser import Parser
 from data.dataset import Dataset
 from model.model import UNet3D, save_model
 from model.training import TrainerTester
+import os
+import csv
 
 def main():
     parser = Parser()
@@ -14,7 +16,11 @@ def main():
     print(f"Model name: {parser.get_model_name()}")
     print(f"Data path: {parser.get_data_path()}\n")
     
-    dataset = Dataset(parser.get_data_path(), n_samples=parser.get_n_samples(), stress_number=parser.get_stress_number(), load_number=0, augment=0)
+    dataset = Dataset(parser.get_data_path(),\
+                        n_samples=parser.get_n_samples(),\
+                        stress_number=parser.get_stress_number(),\
+                        load_number=parser.get_load_number(),\
+                        augment=parser.get_augment())
 
     print(f"Dataset is created with {dataset.n_samples} samples, stress number {dataset.stress_number} and load number {dataset.load_number}.\n")
     if dataset.augment:
@@ -36,6 +42,45 @@ def main():
     # save the model
     save_key = f"N{dataset.n_samples}_stress{dataset.stress_number}_loading{dataset.load_number}"
     save_model(model, save_key=save_key, epochs=training.epochs)
+    
+    results =  [str(parser.get_n_samples()),
+                str(parser.get_n_epochs()),
+                str(parser.get_stress_number()),
+                str(parser.get_load_number()),
+                str(parser.get_augment()),
+                str(parser.get_model_name()),
+                str(parser.get_data_path()),
+                'maxLoss_testing',
+                str(training.epochs),
+                'maxLoss_training',
+                'true_samples']
+    #write to results.csv
+    if not os.path.exists('results.csv'):
+        fields = ['n_samples',
+                'input_epochs',
+                'stress_number',
+                'load_number' ,
+                'augment_files',
+                'model_name' ,
+                'data_path',
+                'maxLoss_testing',
+                'output_epochs',
+                'maxLoss_training',
+                'true_samples']
+        
+        with open('results.csv', 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(fields)
+            file.close()
+    with open('results.csv', 'a', newline='') as file:
+        writer = csv.DictWriter(file)
+        writer.writerow(results)
+        file.close()
+    
+    
+    
+    
+        
     
     del dataset
         

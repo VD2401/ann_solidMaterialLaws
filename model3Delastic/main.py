@@ -50,10 +50,10 @@ def main():
                 str(parser.get_augment()),
                 str(parser.get_model_name()),
                 str(parser.get_data_path()),
-                'maxLoss_testing',
+                str(training.get_max_loss_testing()),
                 str(training.epochs),
-                'maxLoss_training',
-                'true_samples']
+                str(training.get_max_loss_training()),
+                str(dataset.total_samples)]
     #write to results.csv
     if not os.path.exists('results.csv'):
         fields = ['n_samples',
@@ -76,11 +76,6 @@ def main():
         writer = csv.DictWriter(file)
         writer.writerow(results)
         file.close()
-    
-    
-    
-    
-        
     
     del dataset
         

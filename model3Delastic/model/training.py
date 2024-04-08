@@ -98,7 +98,23 @@ class TrainerTester:
         print("Total training time: ", sum(self.training_time))
         self.epochs = epoch
     
-    def compute_lowest_loss(self):
+    def get_max_loss_training(self):
+        if len(self.training_indicator) == 0:
+            print("No testing indicator computed")
+            return
+        indicator = torch.zeros((len(self.train_loader), 1))
+        print("Computing the maximum loss")
+        with torch.no_grad():
+            for batch, (data, target) in enumerate(self.train_loader):
+                data, target = data.to(self.device), target.to(self.device)
+                output = self.model(data)
+                indicator[batch, :] = torch.abs(output - target).mean()
+
+        index = torch.argmax(indicator)
+        print(f"Maximum loss at index {index.item()}")
+        return index, indicator[index]
+    
+    def get_max_loss_testing(self):
         if len(self.testing_indicator) == 0:
             print("No testing indicator computed")
             return
@@ -112,6 +128,10 @@ class TrainerTester:
 
         index = torch.argmax(indicator)
         print(f"Maximum loss at index {index.item()}")
+        return index, indicator[index]
+    
+    def compute_lowest_loss(self):
+        index = self.get_max_loss_testing()
         
         input = self.test_loader.dataset[index][0]
         target = self.test_loader.dataset[index][1]

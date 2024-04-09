@@ -7,7 +7,7 @@ def _data_key(i: int) -> str:
     return "data_elasticity_3D_128_" + str(i) + ".pt"
 
 class Dataset(torch.utils.data.Dataset):
-    def __init__(self, data_path, n_samples=None, stress_number=0, load_number=0, augment=0):
+    def __init__(self, data_path, n_samples=None, stress_number=0, load_number=0, augment=0, keep_prep=0):
         # Check that the data path is correct.
         if not os.path.exists(data_path + _data_key(0)):
             raise ValueError('The data path must lead to a folder with at least one file"' + _data_key(0))
@@ -54,7 +54,7 @@ class Dataset(torch.utils.data.Dataset):
         # We create two tensors to store the input and the output
         
         # this indicator will be used to delete the created datafiles if the preprocessed data is not kept
-        self.keep_prep = False
+        self.keep_prep = keep_prep
         
         # We augment the data if not 0 file augmentation
         self.total_samples = 6*self.n_samples if augment else self.n_samples

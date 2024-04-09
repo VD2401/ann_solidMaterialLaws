@@ -1,0 +1,393 @@
+Arguments of parser are: {'n_samples': 8, 'n_epochs': 10, 'stress_number': 0, 'load_number': 0, 'augment': 0, 'retrain': False, 'model_name': None, 'data_path': 'data/data_files/'}
+Number of samples: 8
+Number of epochs: 10
+Stress number: 0
+Load number: 0
+Augment: 0
+Model name: None
+Data path: data/data_files/
+
+Device:  cpu
+<class 'int'>
+8
+<class 'torch.device'>
+cpu
+Preprocessing of file 1 out of 1
+Value of n:  8 Value of i:  0
+Arguments of parser are: {'n_samples': 8, 'n_epochs': 2, 'stress_number': 0, 'load_number': 0, 'augment': 0, 'retrain': False, 'model_name': None, 'data_path': 'data/data_files/'}
+Number of samples: 8
+Number of epochs: 2
+Stress number: 0
+Load number: 0
+Augment: 0
+Model name: None
+Data path: data/data_files/
+
+Device:  cpu
+<class 'int'>
+8
+<class 'torch.device'>
+cpu
+Preprocessing of file 1 out of 1
+Value of n:  8 Value of i:  0
+File 1 loaded
+Input of file 1 saved. It corresponds to the young modulus.
+Output of file 1 saved.                        It corresponds to the stress number 0 and the load number 0
+Dataset is created with 8 samples, stress number 0 and load number 0.
+
+Input size:  torch.Size([8, 1, 64, 64, 64])
+Output size:  torch.Size([8, 1, 64, 64, 64])
+Data of dataset is loaded.
+Lenght of dataset: 8
+
+Type of model: UNet3D with activation function LeakyReLU.
+Training infrastructure is set.
+Start training.
+Epoch 1/2 - Training Loss: 0.1348 - Testing Loss: 1.3070
+Epoch 2/2 - Training Loss: 0.1343 - Testing Loss: 1.3055
+Computing the maximum loss
+Maximum loss at index 0
+Deletion of input/output
+Deleting files
+Deletion of file  1  out of  1
+Deletion of  data/data_files/data_elasticity_3D_128_0_input.pt
+Deletion of  data/data_files/data_elasticity_3D_128_0_output.pt
+Arguments of parser are: {'n_samples': 16, 'n_epochs': 2, 'stress_number': 0, 'load_number': 0, 'augment': 0, 'retrain': False, 'model_name': None, 'data_path': 'data/data_files/'}
+Number of samples: 16
+Number of epochs: 2
+Stress number: 0
+Load number: 0
+Augment: 0
+Model name: None
+Data path: data/data_files/
+
+Device:  cpu
+<class 'int'>
+16
+<class 'torch.device'>
+cpu
+Preprocessing of file 1 out of 1
+Value of n:  16 Value of i:  0
+File 1 loaded
+Input of file 1 saved. It corresponds to the young modulus.
+Output of file 1 saved.                        It corresponds to the stress number 0 and the load number 0
+Dataset is created with 16 samples, stress number 0 and load number 0.
+
+Input size:  torch.Size([16, 1, 64, 64, 64])
+Output size:  torch.Size([16, 1, 64, 64, 64])
+Data of dataset is loaded.
+Lenght of dataset: 16
+
+Type of model: UNet3D with activation function LeakyReLU.
+Training infrastructure is set.
+Start training.
+Epoch 1/2 - Training Loss: 0.1257 - Testing Loss: 0.9574
+Epoch 2/2 - Training Loss: 0.1206 - Testing Loss: 0.9081
+Computing the maximum loss
+Maximum loss at index 0
+Deletion of input/output
+Deleting files
+Deletion of file  1  out of  1
+Deletion of  data/data_files/data_elasticity_3D_128_0_input.pt
+Deletion of  data/data_files/data_elasticity_3D_128_0_output.pt
+Arguments of parser are: {'n_samples': 32, 'n_epochs': 2, 'stress_number': 0, 'load_number': 0, 'augment': 0, 'retrain': False, 'model_name': None, 'data_path': 'data/data_files/'}
+Number of samples: 32
+Number of epochs: 2
+Stress number: 0
+Load number: 0
+Augment: 0
+Model name: None
+Data path: data/data_files/
+
+Device:  cpu
+<class 'int'>
+32
+<class 'torch.device'>
+cpu
+Preprocessing of file 1 out of 1
+Value of n:  32 Value of i:  0
+Arguments of parser are: {'n_samples': 8, 'n_epochs': 2, 'stress_number': 0, 'load_number': 0, 'augment': 0, 'retrain': False, 'model_name': None, 'data_path': 'data/data_files/'}
+Number of samples: 8
+Number of epochs: 2
+Stress number: 0
+Load number: 0
+Augment: 0
+Model name: None
+Data path: data/data_files/
+
+Device:  cpu
+<class 'int'>
+8
+<class 'torch.device'>
+cpu
+Preprocessing of file 1 out of 1
+Value of n:  8 Value of i:  0
+File 1 loaded
+Input of file 1 saved. It corresponds to the young modulus.
+Output of file 1 saved.                        It corresponds to the stress number 0 and the load number 0
+Dataset is created with 8 samples, stress number 0 and load number 0.
+
+Input size:  torch.Size([8, 1, 64, 64, 64])
+Output size:  torch.Size([8, 1, 64, 64, 64])
+Data of dataset is loaded.
+Lenght of dataset: 8
+
+Type of model: UNet3D with activation function LeakyReLU.
+Training infrastructure is set.
+Start training.
+Epoch 1/2 - Training Loss: 0.1769 - Testing Loss: 1.6422
+Epoch 2/2 - Training Loss: 0.1762 - Testing Loss: 1.6362
+Computing the maximum loss
+Maximum loss at index 0
+1.6362061500549316
+Total training time:  4.067498683929443
+End of training. Number of epochs:  2
+Computing the maximum loss
+Maximum loss at index 0
+Computing the maximum loss
+Maximum loss at index 0
+Deletion of input/output
+Deleting files
+Deletion of file  1  out of  1
+Deletion of  data/data_files/data_elasticity_3D_128_0_input.pt
+Deletion of  data/data_files/data_elasticity_3D_128_0_output.pt
+Arguments of parser are: {'n_samples': 16, 'n_epochs': 2, 'stress_number': 0, 'load_number': 0, 'augment': 0, 'retrain': False, 'model_name': None, 'data_path': 'data/data_files/'}
+Number of samples: 16
+Number of epochs: 2
+Stress number: 0
+Load number: 0
+Augment: 0
+Model name: None
+Data path: data/data_files/
+
+Device:  cpu
+<class 'int'>
+16
+<class 'torch.device'>
+cpu
+Preprocessing of file 1 out of 1
+Value of n:  16 Value of i:  0
+Arguments of parser are: {'n_samples': 8, 'n_epochs': 2, 'stress_number': 0, 'load_number': 0, 'augment': 0, 'retrain': False, 'model_name': None, 'data_path': 'data/data_files/'}
+Number of samples: 8
+Number of epochs: 2
+Stress number: 0
+Load number: 0
+Augment: 0
+Model name: None
+Data path: data/data_files/
+
+Device:  cpu
+<class 'int'>
+8
+<class 'torch.device'>
+cpu
+Preprocessing of file 1 out of 1
+Value of n:  8 Value of i:  0
+File 1 loaded
+Input of file 1 saved. It corresponds to the young modulus.
+Output of file 1 saved.                        It corresponds to the stress number 0 and the load number 0
+Dataset is created with 8 samples, stress number 0 and load number 0.
+
+Input size:  torch.Size([8, 1, 64, 64, 64])
+Output size:  torch.Size([8, 1, 64, 64, 64])
+Data of dataset is loaded.
+Lenght of dataset: 8
+
+Type of model: UNet3D with activation function LeakyReLU.
+Training infrastructure is set.
+Start training.
+Epoch 1/2 - Training Loss: 0.1029 - Testing Loss: 1.0436
+Epoch 2/2 - Training Loss: 0.1017 - Testing Loss: 1.0324
+Computing the maximum loss
+Maximum loss at index 0
+1.0323764085769653
+Total training time:  5.053869724273682
+End of training. Number of epochs:  2
+Computing the maximum loss
+Maximum loss at index 0
+Computing the maximum loss
+Maximum loss at index 0
+Deletion of input/output
+Deleting files
+Deletion of file  1  out of  1
+Deletion of  data/data_files/data_elasticity_3D_128_0_input.pt
+Deletion of  data/data_files/data_elasticity_3D_128_0_output.pt
+Arguments of parser are: {'n_samples': 16, 'n_epochs': 2, 'stress_number': 0, 'load_number': 0, 'augment': 0, 'retrain': False, 'model_name': None, 'data_path': 'data/data_files/'}
+Number of samples: 16
+Number of epochs: 2
+Stress number: 0
+Load number: 0
+Augment: 0
+Model name: None
+Data path: data/data_files/
+
+Device:  cpu
+<class 'int'>
+16
+<class 'torch.device'>
+cpu
+Preprocessing of file 1 out of 1
+Value of n:  16 Value of i:  0
+File 1 loaded
+Input of file 1 saved. It corresponds to the young modulus.
+Output of file 1 saved.                        It corresponds to the stress number 0 and the load number 0
+Dataset is created with 16 samples, stress number 0 and load number 0.
+
+Input size:  torch.Size([16, 1, 64, 64, 64])
+Output size:  torch.Size([16, 1, 64, 64, 64])
+Data of dataset is loaded.
+Lenght of dataset: 16
+
+Type of model: UNet3D with activation function LeakyReLU.
+Training infrastructure is set.
+Start training.
+Epoch 1/2 - Training Loss: 0.1461 - Testing Loss: 1.1573
+Epoch 2/2 - Training Loss: 0.1484 - Testing Loss: 1.1534
+Computing the maximum loss
+Maximum loss at index 0
+1.1533538103103638
+Total training time:  8.01711630821228
+End of training. Number of epochs:  2
+Computing the maximum loss
+Maximum loss at index 0
+Computing the maximum loss
+Maximum loss at index 0
+Deletion of input/output
+Deleting files
+Deletion of file  1  out of  1
+Deletion of  data/data_files/data_elasticity_3D_128_0_input.pt
+Deletion of  data/data_files/data_elasticity_3D_128_0_output.pt
+Arguments of parser are: {'n_samples': 8, 'n_epochs': 2, 'stress_number': 0, 'load_number': 0, 'augment': 0, 'retrain': False, 'model_name': None, 'data_path': 'data/data_files/'}
+Number of samples: 8
+Number of epochs: 2
+Stress number: 0
+Load number: 0
+Augment: 0
+Model name: None
+Data path: data/data_files/
+
+Device:  cpu
+<class 'int'>
+8
+<class 'torch.device'>
+cpu
+Preprocessing of file 1 out of 1
+Value of n:  8 Value of i:  0
+File 1 loaded
+Input of file 1 saved. It corresponds to the young modulus.
+Output of file 1 saved.                        It corresponds to the stress number 0 and the load number 0
+Dataset is created with 8 samples, stress number 0 and load number 0.
+
+Input size:  torch.Size([8, 1, 64, 64, 64])
+Output size:  torch.Size([8, 1, 64, 64, 64])
+Data of dataset is loaded.
+Lenght of dataset: 8
+
+Type of model: UNet3D with activation function LeakyReLU.
+Training infrastructure is set.
+Start training.
+Epoch 1/2 - Training Loss: 0.1075 - Testing Loss: 1.0491
+Epoch 2/2 - Training Loss: 0.1031 - Testing Loss: 1.0057
+Computing the maximum loss
+Maximum loss at index 0
+1.0057122707366943
+Total training time:  5.418192386627197
+End of training. Number of epochs:  2
+Computing the maximum loss
+Maximum loss at index 0
+Computing the maximum loss
+Maximum loss at index 0
+Deletion of input/output
+Deleting files
+Deletion of file  1  out of  1
+Deletion of  data/data_files/data_elasticity_3D_128_0_input.pt
+Deletion of  data/data_files/data_elasticity_3D_128_0_output.pt
+Arguments of parser are: {'n_samples': 16, 'n_epochs': 2, 'stress_number': 0, 'load_number': 0, 'augment': 0, 'retrain': False, 'model_name': None, 'data_path': 'data/data_files/'}
+Number of samples: 16
+Number of epochs: 2
+Stress number: 0
+Load number: 0
+Augment: 0
+Model name: None
+Data path: data/data_files/
+
+Device:  cpu
+<class 'int'>
+16
+<class 'torch.device'>
+cpu
+Preprocessing of file 1 out of 1
+Value of n:  16 Value of i:  0
+File 1 loaded
+Input of file 1 saved. It corresponds to the young modulus.
+Output of file 1 saved.                        It corresponds to the stress number 0 and the load number 0
+Dataset is created with 16 samples, stress number 0 and load number 0.
+
+Input size:  torch.Size([16, 1, 64, 64, 64])
+Output size:  torch.Size([16, 1, 64, 64, 64])
+Data of dataset is loaded.
+Lenght of dataset: 16
+
+Type of model: UNet3D with activation function LeakyReLU.
+Training infrastructure is set.
+Start training.
+Epoch 1/2 - Training Loss: 0.1512 - Testing Loss: 1.2109
+Epoch 2/2 - Training Loss: 0.1541 - Testing Loss: 1.2087
+Computing the maximum loss
+Maximum loss at index 0
+1.208723783493042
+Total training time:  11.024430990219116
+End of training. Number of epochs:  2
+Computing the maximum loss
+Maximum loss at index 0
+Computing the maximum loss
+Maximum loss at index 1
+Deletion of input/output
+Deleting files
+Deletion of file  1  out of  1
+Deletion of  data/data_files/data_elasticity_3D_128_0_input.pt
+Deletion of  data/data_files/data_elasticity_3D_128_0_output.pt
+Arguments of parser are: {'n_samples': 32, 'n_epochs': 2, 'stress_number': 0, 'load_number': 0, 'augment': 0, 'retrain': False, 'model_name': None, 'data_path': 'data/data_files/'}
+Number of samples: 32
+Number of epochs: 2
+Stress number: 0
+Load number: 0
+Augment: 0
+Model name: None
+Data path: data/data_files/
+
+Device:  cpu
+<class 'int'>
+32
+<class 'torch.device'>
+cpu
+Preprocessing of file 1 out of 1
+Value of n:  32 Value of i:  0
+File 1 loaded
+Input of file 1 saved. It corresponds to the young modulus.
+Arguments of parser are: {'n_samples': 8, 'n_epochs': 200, 'stress_number': 0, 'load_number': 0, 'augment': 0, 'retrain': False, 'model_name': None, 'data_path': 'data/data_files/'}
+Number of samples: 8
+Number of epochs: 200
+Stress number: 0
+Load number: 0
+Augment: 0
+Model name: None
+Data path: data/data_files/
+
+Device:  cpu
+<class 'int'>
+8
+<class 'torch.device'>
+cpu
+Preprocessing of file 1 out of 1
+Data already preprocessed
+Dataset is created with 8 samples, stress number 0 and load number 0.
+
+Input size:  torch.Size([32, 1, 64, 64, 64])
+Output size:  torch.Size([32, 1, 64, 64, 64])
+Dataset loaded.
+Lenght of dataset: 8
+
+Type of model: UNet3D with activation function LeakyReLU.
+Training infrastructure is set.
+Start training.

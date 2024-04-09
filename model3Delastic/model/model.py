@@ -104,13 +104,12 @@ class UNet3D(torch.nn.Module):
 
         return out
     
-    
 def save_model(model, save_key, epochs):
     # save model
-    torch.save(model.state_dict(), "model/model_" + save_key + "_ep" + str(epochs) + ".pt")
+    torch.save(model.state_dict(), "model/model_save/model_" + save_key + "_ep" + str(epochs) + ".pt")
     # save model as script
     model_scripted = torch.jit.script(model)
-    model_scripted.save("model/model_scripted_" + save_key + "_ep" + str(epochs) + ".pt")
+    model_scripted.save("model/model_scripted_save/model_scripted_" + save_key + "_ep" + str(epochs) + ".pt")
     
 def load_model(model_path_name):
     model = UNet3D()

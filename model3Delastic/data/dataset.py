@@ -7,7 +7,7 @@ def _data_key(i: int) -> str:
     return "data_elasticity_3D_128_" + str(i) + ".pt"
 
 class Dataset(torch.utils.data.Dataset):
-    def __init__(self, data_path, n_samples=None, stress_number=0, load_number=0, augment=1):
+    def __init__(self, data_path, n_samples=None, stress_number=0, load_number=0, augment=0):
         # Check that the data path is correct.
         if not os.path.exists(data_path + _data_key(0)):
             raise ValueError('The data path must lead to a folder with at least one file"' + _data_key(0))
@@ -103,9 +103,10 @@ class Dataset(torch.utils.data.Dataset):
                                             .view(128, 1, 64, 64, 64)\
                                                 .detach().clone().cpu()[:n]
                 torch.save({"output": output}, key_output)
-                print("Output of file " + str(i+1) + " saved.\
-                        It corresponds to the stress number " + str(self.stress_number)\
-                            + " and the load number " + str(self.load_number))
+                print("Output of file " + str(i+1) + 
+                      " saved. It corresponds to the stress number " +
+                      str(self.stress_number) + " and the load number " +
+                      str(self.load_number))
                 del data # Free memory
     
     def augmentate(self):

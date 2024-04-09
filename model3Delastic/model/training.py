@@ -88,10 +88,10 @@ class TrainerTester:
                 self.compute_lowest_loss()
             epoch += 1
             # Create a condition if the last ten indicators have less than 1% of decrease then it should be true. It should work even if testing_indicator does not have 10 elements.
-            zero_gradient_condition =len(self.testing_indicator) >= 20 and \
-                    (0.99*self.testing_indicator[-20:].mean() - self.testing_indicator[-1] > 0)
+            zero_gradient_condition =len(self.testing_indicator) >= 25 and \
+                    (0.99*self.testing_indicator[-25:-13].mean() - self.testing_indicator[-13:-1].mean() > 0)
             if zero_gradient_condition:
-                print("ZERO GRADIENT CONDITION. The training stops because the testing indicator has not decreased by more than 1% in the last 20 epochs.")
+                print("ZERO GRADIENT CONDITION. The training stops because the testing indicator has a decrease rate too low or negative in the last 25 epochs.")
             if  self.testing_indicator[-1] < 0.02 or zero_gradient_condition:
                 self.compute_lowest_loss()
                 break
@@ -100,10 +100,10 @@ class TrainerTester:
     
     def get_max_loss_training(self):
         if len(self.training_indicator) == 0:
-            print("No testing indicator computed")
+            print("No training indicator computed")
             return
         indicator = torch.zeros((len(self.train_loader), 1))
-        print("Computing the maximum loss")
+        print("Computing the maximum loss for training")
         with torch.no_grad():
             for batch, (data, target) in enumerate(self.train_loader):
                 data, target = data.to(self.device), target.to(self.device)
@@ -111,15 +111,14 @@ class TrainerTester:
                 indicator[batch, :] = torch.abs(output - target).mean()
 
         index = torch.argmax(indicator)
-        print(f"Maximum loss at index {index.item()}")
-        return index, indicator[index]
+        return index, indicator.flatten()[index].item()
     
     def get_max_loss_testing(self):
         if len(self.testing_indicator) == 0:
             print("No testing indicator computed")
             return
         indicator = torch.zeros((len(self.test_loader), 1))
-        print("Computing the maximum loss")
+        print("Computing the maximum loss for testing")
         with torch.no_grad():
             for batch, (data, target) in enumerate(self.test_loader):
                 data, target = data.to(self.device), target.to(self.device)
@@ -127,11 +126,10 @@ class TrainerTester:
                 indicator[batch, :] = torch.abs(output - target).mean()
 
         index = torch.argmax(indicator)
-        print(f"Maximum loss at index {index.item()}")
-        return index, indicator[index]
+        return index, indicator.flatten()[index].item()
     
     def compute_lowest_loss(self):
-        index = self.get_max_loss_testing()
+        index, indicator = self.get_max_loss_testing()
         
         input = self.test_loader.dataset[index][0]
         target = self.test_loader.dataset[index][1]
@@ -142,7 +140,7 @@ class TrainerTester:
         plot_volume.volume(x ,y ,z , input[0, ...], save_key=save_key + '_input')
         plot_volume.volume(x ,y ,z , target[0, ...], vmin=0, vmax=3.5, save_key=save_key + '_target')
         plot_volume.volume(x ,y ,z , output[0, 0, ...], vmin=0, vmax=3.5, save_key=save_key+ '_output')
-        print(indicator.flatten()[index].item())
+        print(indicator)
 
         plot_slice.plot_ITOE(input[0, ...], target[0, ...], output[0, 0, ...], index, 0, save_key=save_key)
 

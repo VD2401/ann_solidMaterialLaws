@@ -47,8 +47,8 @@ class Parser:
         
         # Check that number of file to be augmented exists
         if self.args['augment']:
-            if not os.path.exists(self.args['data_path'] + f'data_elasticity_3D_128_{self.args['augment']}.pt'):
-                raise ValueError(f'The data path must lead to a folder with "data_elasticity_3D_128_{self.args['augment']}.pt"')
+            if not os.path.exists(self.args['data_path'] + 'data_elasticity_3D_128_' + {self.args['augment']} + '.pt'):
+                raise ValueError('The data path must lead to a folder with "data_elasticity_3D_128_' + self.args['augment']+ '.pt"')
         
         
     def get_args(self):

@@ -27,7 +27,7 @@ def main():
         dataset.augmentate()
         print("Augmentation of dataset is done.")
     dataset.load_data()
-    print("Data of dataset is loaded.")
+    print("Dataset loaded.")
     print(f"Lenght of dataset: {len(dataset)}\n")
     
     model = UNet3D()
@@ -50,9 +50,9 @@ def main():
                 str(parser.get_augment()),
                 str(parser.get_model_name()),
                 str(parser.get_data_path()),
-                str(training.get_max_loss_testing()),
+                str(training.get_max_loss_testing()[1]),
                 str(training.epochs),
-                str(training.get_max_loss_training()),
+                str(training.get_max_loss_training()[1]),
                 str(dataset.total_samples)]
     #write to results.csv
     if not os.path.exists('results.csv'):
@@ -73,7 +73,7 @@ def main():
             writer.writerow(fields)
             file.close()
     with open('results.csv', 'a', newline='') as file:
-        writer = csv.DictWriter(file)
+        writer = csv.writer(file)
         writer.writerow(results)
         file.close()
     

@@ -10,5 +10,5 @@ echo "
 RUNNING SIMULATION FOR n_samples = $n
 ————————————————————————————————
 "
-python3 -u main.py --n_samples $n --n_epochs 10 --stress_number 0 --data_path data/data_files/ | tee -a output.txt
+python3 -u main.py --n_samples $n --n_epochs 200 --stress_number 0 --data_path data/data_files/ | tee -a output.txt
 done

@@ -1,16 +1,4 @@
-# Data folder
-model2Delastic/data/*
-model3Delastic/data/data_files/*
-!model3Delastic/data/data_files/.gitkeep
-model3Delastic/test/test_parameters/output_image/*
-!model3Delastic/test/test_parameters/output_image/.gitkeep
-model3Delastic/test/test_parameters/output_slice/*
-!model3Delastic/test/test_parameters/output_slice/.gitkeep
-model3Delastic/test/test_parameters/training/*
-!model3Delastic/test/test_parameters/training/.gitkeep
-model3Delastic/test/test_parameters_w6/*
 
-model3Delastic/test_parameters/training/*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

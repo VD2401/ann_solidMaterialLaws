@@ -1,8 +1,10 @@
 import torch
 import time
+import numpy as np
 from model.model import UNet3D
 from data import dataset
 from utils.visualization import plot_learning, plot_slice, plot_volume
+from utils.postprocessing.writer import write_results
 
 
 class TrainerTester:
@@ -19,6 +21,8 @@ class TrainerTester:
         self.lr = 1e-3
         self.split_ratio = 0.75
         self.batch_size = 8
+        self.stop_criteria = 0.02
+        self.max_epochs = 50#200*(128//self.dataset.n_samples) # Set the same computing time for each dataset
         
         self.training_time = list()
         self.testing_time = list()
@@ -67,9 +71,9 @@ class TrainerTester:
                 indicator[batch] = torch.abs(output - target).mean()
         return indicator.mean().item()
     
-    def train(self, n_epochs: int=100):
+    def train(self):
         epoch = 0
-        while (epoch < n_epochs):
+        while (epoch < self.max_epochs):
             start = time.time()
             train_indicator = self.train_loop()
             self.training_indicator.append(train_indicator)
@@ -80,23 +84,40 @@ class TrainerTester:
             self.testing_indicator.append(test_indicator)
             self.testing_time.append(time.time() - start)
             
-            print(f"Epoch {epoch+1}/{n_epochs} - Training Loss: {train_indicator:.4f} - Testing Loss: {test_indicator:.4f}")
+            epoch += 1
+            print(f"Epoch {epoch} - Training Loss: {train_indicator:.4f} - Testing Loss: {test_indicator:.4f}")
             
             save_key = f"N{self.dataset.n_samples}_stress{self.dataset.stress_number}_loading{self.dataset.load_number}"
             plot_learning.learning(self.training_indicator, self.testing_indicator, self.training_time[-1], save_key)
-            if epoch+1 % 25 == 0 or epoch == n_epochs - 1:
-                self.compute_lowest_loss()
-            epoch += 1
-            # Create a condition if the last ten indicators have less than 1% of decrease then it should be true. It should work even if testing_indicator does not have 10 elements.
-            zero_gradient_condition =len(self.testing_indicator) >= 25 and \
-                    (0.99*self.testing_indicator[-25:-13].mean() - self.testing_indicator[-13:-1].mean() > 0)
-            if zero_gradient_condition:
-                print("ZERO GRADIENT CONDITION. The training stops because the testing indicator has a decrease rate too low or negative in the last 25 epochs.")
-            if  self.testing_indicator[-1] < 0.02 or zero_gradient_condition:
+            
+            if self.testing_indicator[-1] < self.stop_criteria or epoch == self.max_epochs:
                 self.compute_lowest_loss()
                 break
+            if epoch % self.max_epochs//4 + 1 == 0:
+                self.model.save_model(save_key=save_key, epochs=epoch)
+                
+            # Create a condition if the last ten indicators have less than 1% of decrease then it should be true. It should work even if testing_indicator does not have 10 elements.
+            # zero_gradient_condition =len(self.testing_indicator) >= 50 and \
+            #         (0.999*np.array(self.testing_indicator[-50:-25]).mean()
+            #         < np.array(self.testing_indicator[-25:-1]).mean())
+            # if zero_gradient_condition:
+            #     print(0.999*np.array(self.testing_indicator[-50:-25]).mean())
+            #     print(np.array(self.testing_indicator[-25:-1]).mean())
+            #     print("ZERO GRADIENT CONDITION. The training stops because the testing indicator has a decrease rate too low or negative in the last 25 epochs.")
+            # if  self.testing_indicator[-1] < 0.02 or zero_gradient_condition:
+            #     self.compute_lowest_loss()
+            #     break
         print("Total training time: ", sum(self.training_time))
         self.epochs = epoch
+        write_results([str(self.dataset.n_samples),
+                       str(self.epochs),
+                       str(self.dataset.stress_number),
+                       str(self.dataset.load_number),
+                       str(self.dataset.augment),
+                       str(self.testing_indicator),
+                       str(self.training_indicator),
+                       str(sum(self.training_time)),
+                       str(sum(self.testing_time))])
     
     def get_max_loss_training(self):
         if len(self.training_indicator) == 0:

@@ -16,7 +16,7 @@ class Parser:
         self.parser.add_argument('--model_name', type=str, help='Name of the model. If --retrain is False: set to None. Else: Mandatory.', default=None)
         self.parser.add_argument('--data_path', type=str, help='Path to the data. Mandatory.', default='data/')
         
-        # If from cell or notebook
+        # If from python script or notebook
         if args is not None:
             self.args = vars(self.parser.parse_args(args))
         

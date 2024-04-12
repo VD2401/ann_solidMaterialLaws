@@ -22,6 +22,7 @@ def learning(training_indicator, testing_indicator, training_time, save_key, **k
     plt.xlabel('Epochs')
     plt.xlim([0, len(testing_indicator) + 1])
 
+    plt.yscale('log')
     plt.ylabel('Mean Absolute Error')
     plt.ylim([data_min, data_max])
 
@@ -29,9 +30,7 @@ def learning(training_indicator, testing_indicator, training_time, save_key, **k
     plt.legend()
     plt.annotate('Epoch duration = ' + str(round(training_time, 2)) + ' s',
                  (0.05 * (len(testing_indicator) + 1), 0.95 * max([max(training_indicator), max(testing_indicator)])))
-
-    # plt.yscale('log')
-
+    
     # save figure
     plt.savefig(OUTPUT_DIR + 'training_' +save_key + '.png')
     

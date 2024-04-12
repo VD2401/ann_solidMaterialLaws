@@ -22,7 +22,7 @@ class TrainerTester:
         self.split_ratio = 0.75
         self.batch_size = 8
         self.stop_criteria = 0.02
-        self.max_epochs = 50#200*(128//self.dataset.n_samples) # Set the same computing time for each dataset
+        self.max_epochs = 200*(128//self.dataset.n_samples) # Set the same computing time for each dataset
         
         self.training_time = list()
         self.testing_time = list()

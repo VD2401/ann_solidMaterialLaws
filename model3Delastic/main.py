@@ -6,13 +6,14 @@ import os
 import csv
 
 def main():
-    N_SAMPLES = [8, 16, 32, 64, 128, 256, 384, 512, 640, 768, 896, 1024]
+    N_SAMPLES = [16, 32, 64, 128, 256, 384, 512, 640, 768, 896, 1024]
     DATA_PATH = 'data/data_files/'
     STRESS_NUMBER = 0
     LOAD_NUMBER = 0
     AUGMENT = False
     
     for n_sample in N_SAMPLES:
+        print(f"\n\n——————————————————————\nFor number of samples: {n_sample}\n——————————————————————\n")
         # parser = Parser()
         # print(f"Arguments of parser are: {parser.get_args()}")
         # print(f"Number of samples: {parser.get_n_samples()}")

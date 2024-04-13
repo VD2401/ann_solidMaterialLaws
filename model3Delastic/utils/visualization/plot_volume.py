@@ -4,7 +4,7 @@ import torch
 
 OUTPUT_DIR = 'test/test_parameters/output_image/'
 
-def volume(x, y, z, data, save_key, **kwargs):
+def volume(x, y, z, data, save_key=None, **kwargs):
 
     x = x.cpu()
     y = y.cpu()
@@ -87,6 +87,6 @@ def volume(x, y, z, data, save_key, **kwargs):
     ax.set_proj_type('ortho')
     ax.set_aspect('equal')
     # save the figure
-    plt.savefig(OUTPUT_DIR + 'volume_' + save_key + '.png')
+    #plt.savefig(OUTPUT_DIR + 'volume_' + save_key + '.png')
     
-    plt.close()
+    plt.show()

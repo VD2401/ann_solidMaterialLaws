@@ -3,16 +3,18 @@ import os
 from . import rotate
 from numpy import ceil
 
-def _data_key(i: int) -> str:
-    return "data_elasticity_3D_128_" + str(i) + "_input.pt"
+def _data_key(i: int, l, s) -> str:
+    return "data_elasticity_3D_128_" + str(i) + "_L" + str(l) + "_S" + str(s) + "_input.pt"
 
 class Dataset(torch.utils.data.Dataset):
     def __init__(self, data_path, n_samples=None, stress_number=0, load_number=0, augment=0, keep_prep=0):
-        # Check that the data path is correct.
-        if not os.path.exists(data_path + _data_key(0)):
-            raise ValueError('The data path must lead to a folder with at least one file"' + _data_key(0))
+        # # Check that the data path is correct.
+        # if not os.path.exists(data_path + _data_key(3, load_number, stress_number)):
+        #     print(os.listdir(data_path))
+        #     raise ValueError('The data path must lead to a folder with at least one file "' + _data_key(3, load_number, stress_number)
+        #                      + ' and here the search path is ' + data_path + '"')
         m = 1
-        while os.path.exists(data_path + _data_key(m)):
+        while os.path.exists(data_path + _data_key(m, load_number, stress_number)):
             m += 1
         # We save the number of datafiles available. Files are named data_elasticity_3D_128_i.pt
         self.number_of_files = m
@@ -51,8 +53,6 @@ class Dataset(torch.utils.data.Dataset):
         self.input = torch.zeros((0, 1, 64, 64, 64), device=self.device)
         self.output = torch.zeros((0, 1, 64, 64, 64), device=self.device)
         
-        # We preprocess the data to create specific input/output files
-        #self.preprocessing()
             
     def __len__(self):
         return self.n_samples
@@ -62,42 +62,6 @@ class Dataset(torch.utils.data.Dataset):
             return self.input[idx], self.output[idx]
         else: 
             raise IndexError("Index out of range")
-    
-    def preprocessing(self):
-        # Load every datafiles and create two new files. One for the input, the other for the output.
-        for i in range(int(ceil(self.n_samples/128))):
-            
-            print(f"Preprocessing of file {self.data_path + _data_key(i)}")
-            key_input = self.data_path + "data_elasticity_3D_128_" + str(i) + "_input.pt"
-            key_output = self.data_path + "data_elasticity_3D_128_" + str(i) + "_output.pt"
-            
-            # Number of samples to load from the file i
-            n = min(128, abs(self.n_samples - i*128)) 
-            
-            try:
-                data = torch.load(self.data_path + _data_key(i), map_location=self.device)
-            except:
-                raise ValueError(f"Data file {_data_key(i)} not found in {self.data_path}")
-            print("File " + str(i+1) + " loaded")
-            
-            # Save input and output
-            input = data["young_modulus"].view(128, 1, 64, 64, 64)\
-                                            .detach().clone().cpu()[:n]
-            torch.save({'input': input}, key_input)
-            # input = torch.rot90(input, k=1, dims=(1, 3))
-            print("Input of file " + str(i+1) + " saved. It corresponds to the young modulus.")
-            output = data["stress"].select(5, self.stress_number)\
-                                    .select(1, self.load_number)\
-                                        .view(128, 1, 64, 64, 64)\
-                                            .detach().clone().cpu()[:n]
-            # output = torch.rot90(output, k=1, dims=(1, 3))
-            torch.save({"output": output}, key_output)
-            print("Output of file " + str(i+1) + 
-                    " saved. It corresponds to the stress number " +
-                    str(self.stress_number) + " and the load number " +
-                    str(self.load_number))
-            
-            del data # Free memory
     
     def augmentate(self):
         # Augment the data
@@ -138,8 +102,11 @@ class Dataset(torch.utils.data.Dataset):
         
     def load_data(self):
         for i in range(int(ceil(self.n_samples/128))):
-            key_input = self.data_path + "data_elasticity_3D_128_" + str(i) + "_input.pt"
-            key_output = self.data_path + "data_elasticity_3D_128_" + str(i) + "_output.pt"
+            key_input = self.data_path + _data_key(i, self.load_number, self.stress_number)
+            key_output = key_input.replace('input', 'output')
+            print(key_input)
+            print(key_output)
+            os.listdir(self.data_path)
             if os.path.exists(key_input) and os.path.exists(key_output):
                 input = torch.load(key_input, map_location=self.device)['input']
                 output = torch.load(key_output, map_location=self.device)['output']
@@ -147,13 +114,15 @@ class Dataset(torch.utils.data.Dataset):
                 self.output = torch.cat((self.output, output), 0)
             else:
                 raise ValueError("Data not preprocessed")   
-        print(f"After augmentation the input/output size is {self.input.size()}")
+            self.input = self.input[:self.n_samples]
+            self.output = self.output[:self.n_samples]
+        print(f"After " + str(self.augment) + " augmentation the input & output size is {self.input.size()}")
 
     def __del__(self):
         del self.input
         del self.output
         print("Deletion of input/output")
-        if (not self.keep_prep) or self.augment: # We delete the data if chosen or if the file were changed due to data_augmentation
+        if 0:#(not self.keep_prep) or self.augment: # We delete the data if chosen or if the file were changed due to data_augmentation
             print("Deleting files")
             for i in range(int(ceil(self.n_samples/128))):
                 print("Deletion of file ", i+1, " out of ", int(ceil(self.n_samples/128)))

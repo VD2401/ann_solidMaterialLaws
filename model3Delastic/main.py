@@ -1,16 +1,15 @@
 from data.parser import Parser
 from data.dataset import Dataset
-from model.model import UNet3D, save_model, UNet3D_2
+from model.model import UNet3D, save_model, UNet3D_2, load_model
 from model.training import TrainerTester
 import os
 import csv
 
 def main():
-    N_SAMPLES = [16, 32, 64, 128, 256, 384, 512, 640, 768, 896, 1024]
+    N_SAMPLES = [384]
     DATA_PATH = 'data/data_files/'
-    STRESS_NUMBER = 0
-    LOAD_NUMBER = 0
     AUGMENT = False
+    STRESS_NUMBER
     
     for n_sample in N_SAMPLES:
         print(f"\n\n——————————————————————\nFor number of samples: {n_sample}\n——————————————————————\n")
@@ -44,7 +43,7 @@ def main():
         print("Dataset loaded.")
         print(f"Lenght of dataset: {len(dataset)}\n")
         
-        model = UNet3D()
+        model = load_model('model/model_save/model_N384_stress0_loading0_ep100.pt')
         print(f"Type of model: UNet3D with activation function LeakyReLU.")
         
         training = TrainerTester(model, dataset)

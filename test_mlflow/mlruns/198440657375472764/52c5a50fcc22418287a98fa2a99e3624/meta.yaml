@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/198440657375472764/52c5a50fcc22418287a98fa2a99e3624/artifacts
+end_time: 1715039556845
+entry_point_name: ''
+experiment_id: '198440657375472764'
+lifecycle_stage: active
+run_id: 52c5a50fcc22418287a98fa2a99e3624
+run_name: apples_rf_test
+run_uuid: 52c5a50fcc22418287a98fa2a99e3624
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1715039552607
+status: 3
+tags: []
+user_id: pauldevianne

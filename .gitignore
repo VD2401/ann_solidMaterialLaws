@@ -1,6 +1,9 @@
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+cluster_folder/__pycache__/
+cluster_folder/mlruns/*
+test_mlflow/mlflow_project/*
 *.py[cod]
 *$py.class
 **/.DS_Store
@@ -153,6 +156,9 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Remove all .pt files
+*.pt
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can

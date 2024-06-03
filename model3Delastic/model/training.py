@@ -6,6 +6,7 @@ from data import dataset
 from utils.visualization import plot_learning, plot_slice, plot_volume
 from utils.postprocessing.writer import write_results
 
+torch.manual_seed(0)
 
 class TrainerTester:
     def __init__(self, model: UNet3D, dataset: dataset.Dataset) -> None:
@@ -21,8 +22,8 @@ class TrainerTester:
         self.lr = 1e-3
         self.split_ratio = 0.75
         self.batch_size = 8
-        self.stop_criteria = 0.02
-        self.max_epochs = 200*(128//self.dataset.n_samples) # Set the same computing time for each dataset
+        self.stop_criteria = 0
+        self.max_epochs = int(500*128/self.dataset.n_samples) # Set the same computing time for each dataset
         
         self.training_time = list()
         self.testing_time = list()
@@ -47,7 +48,7 @@ class TrainerTester:
 
 # train function
     def train_loop(self):
-        indicator = torch.zeros((len(self.dataset),))
+        indicator = torch.zeros((len(self.train_loader),))
         self.model.train()
         for batch, (data, target) in enumerate(self.train_loader):
             data, target = data.to(self.device), target.to(self.device)
@@ -61,7 +62,6 @@ class TrainerTester:
 
 # test function
     def test_loop(self):
-        indicator = torch.zeros((len(self.dataset),))
         indicator = torch.zeros((len(self.test_loader),))
         self.model.eval()
         with torch.no_grad():
@@ -123,13 +123,13 @@ class TrainerTester:
         if len(self.training_indicator) == 0:
             print("No training indicator computed")
             return
-        indicator = torch.zeros((len(self.train_loader), 1))
+        indicator = torch.zeros((len(self.train_loader),))
         print("Computing the maximum loss for training")
         with torch.no_grad():
             for batch, (data, target) in enumerate(self.train_loader):
                 data, target = data.to(self.device), target.to(self.device)
                 output = self.model(data)
-                indicator[batch, :] = torch.abs(output - target).mean()
+                indicator[batch] = torch.abs(output - target).mean()
 
         index = torch.argmax(indicator)
         return index, indicator.flatten()[index].item()
@@ -138,13 +138,13 @@ class TrainerTester:
         if len(self.testing_indicator) == 0:
             print("No testing indicator computed")
             return
-        indicator = torch.zeros((len(self.test_loader), 1))
+        indicator = torch.zeros((len(self.test_loader),))
         print("Computing the maximum loss for testing")
         with torch.no_grad():
             for batch, (data, target) in enumerate(self.test_loader):
                 data, target = data.to(self.device), target.to(self.device)
                 output = self.model(data)
-                indicator[batch, :] = torch.abs(output - target).mean()
+                indicator[batch] = torch.abs(output - target).mean()
 
         index = torch.argmax(indicator)
         return index, indicator.flatten()[index].item()
@@ -165,3 +165,31 @@ class TrainerTester:
 
         plot_slice.plot_ITOE(input[0, ...], target[0, ...], output[0, 0, ...], index, 0, save_key=save_key)
 
+    def get_mean_loss_training(self):
+        if len(self.training_indicator) == 0:
+            print("No training indicator computed")
+            return
+        indicator = torch.zeros((len(self.train_loader), 1))
+        print("Computing the maximum loss for training")
+        with torch.no_grad():
+            for batch, (data, target) in enumerate(self.train_loader):
+                data, target = data.to(self.device), target.to(self.device)
+                output = self.model(data)
+                indicator[batch, :] = torch.abs(output - target).mean()
+        return indicator.mean().item()
+    
+    
+    def get_mean_loss_testing(self):
+        if len(self.testing_indicator) == 0:
+            print("No testing indicator computed")
+            return
+        indicator = torch.zeros((len(self.test_loader), 1))
+        print("Computing the maximum loss for testing")
+        with torch.no_grad():
+            for batch, (data, target) in enumerate(self.test_loader):
+                data, target = data.to(self.device), target.to(self.device)
+                output = self.model(data)
+                indicator[batch, :] = torch.abs(output - target).mean()
+        return indicator.mean().item()
+    
+    

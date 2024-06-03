@@ -1,0 +1,11 @@
+name: test_mlflow_ann
+
+python_env: python_env.yaml
+
+entry_points:
+    main:
+        parameters:
+            d_set: {type: str, default: ./}
+            seed: {type: int, default: 42}
+        command: "python main.py {dset} {seed}"
+        

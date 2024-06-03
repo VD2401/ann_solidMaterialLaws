@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/911732795393128904/cba36ec2323d476db06ef84772aee9d7/artifacts
+end_time: 1715024609090
+entry_point_name: ''
+experiment_id: '911732795393128904'
+lifecycle_stage: active
+run_id: cba36ec2323d476db06ef84772aee9d7
+run_name: gifted-penguin-94
+run_uuid: cba36ec2323d476db06ef84772aee9d7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1715024604723
+status: 3
+tags: []
+user_id: pauldevianne

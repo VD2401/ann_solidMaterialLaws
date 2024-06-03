@@ -94,7 +94,8 @@ class UNet3D(torch.nn.Module):
         super(UNet3D, self).__init__()
         
         self.activation = torch.nn.LeakyReLU()
-
+        self.retrain = False
+        
         # input: 64x64x64, output: 32x32x32
         self.e11 = torch.nn.Conv3d(1, 4, kernel_size=3, stride=1, padding="same", padding_mode="circular")
         self.e12 = torch.nn.Conv3d(4, 4, kernel_size=3, stride=1, padding="same", padding_mode="circular")

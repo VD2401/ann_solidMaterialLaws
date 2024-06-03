@@ -1,6 +1,4 @@
-import matplotlib
 import matplotlib.pyplot as plt
-import torch
 
 OUTPUT_DIR = 'test/test_parameters/training/'
 

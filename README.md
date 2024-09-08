@@ -21,6 +21,6 @@ The different files starting by `main` are the file executed for testing the dif
 The notebooks can help for visualization of results.
 
 We use the *mlflow* library for recording the runs and help compare them together. With the code implemented in the `main` file, parameters are automatically recorded at run time in the mlflow folder. At each node of the mlflow folder tree there is a meta.yaml file that provides information. 
-Each "Experiment" is a test for a parameter (can be multiple but here one). An experiment has an ID (list of numbers) and a name. The folder has the name of the ID. 
-Each "Run" tests a value for a parameter (or multiple). Runs have a name (can be shared between runs) but have a unique ID (sequence of letters and numbers).  
-To visualize the results: Install a python environment with pip or conda with mlflow library. In the terminal, activate the environment. Cd to the folder containing the `mlruns` folder. Finally, enter `mlflow ui`.
+Each "Experiment" is a test for a parameter (can be multiple but here one). An experiment has an ID (list of numbers) and a name. The name of the folder that contains the experiment's info is the experiment's ID. 
+Each "Run" tests a value for a parameter (or multiple). Runs have a name (can be shared between runs) but have a unique ID (sequence of letters and numbers). Same as before, the folder's name is the run's ID.  
+To visualize the results: Install a python environment with pip or conda. Install mlflow library. In the terminal, activate the environment. Cd to the folder containing the `mlruns` folder. Finally, enter `mlflow ui`.

@@ -1,6 +1,0 @@
-- matplotlib
-- numpy
-- mlflow==2.3
-- torch
-- torchvision
-- torchaudio

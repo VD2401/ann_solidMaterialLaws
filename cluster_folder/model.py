@@ -2,17 +2,22 @@ import torch
 
 # %%
 class UNet3D(torch.nn.Module):
-    def __init__(self):
+    def __init__(self,
+                 width1=4,
+                 width2=8,
+                 width3=16,
+                 width4=32,
+                 width5=64,):
         super(UNet3D, self).__init__()
 
         self.activation = torch.nn.LeakyReLU()
         self.retrain = False
         self.depth = 5
-        self.width1 = 4
-        self.width2 = 8
-        self.width3 = 16
-        self.width4 = 32
-        self.width5 = 64
+        self.width1 = width1
+        self.width2 = width2
+        self.width3 = width3
+        self.width4 = width4
+        self.width5 = width5
         self.kernel_size_conv1 = 3
         self.kernel_size_conv2 = 3
         self.stride_conv1 = 1

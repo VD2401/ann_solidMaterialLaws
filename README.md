@@ -355,7 +355,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🙏 Acknowledgments
 
-- Data generated using Green-FFT method (Sainsot et al., 2011)
+- Dr. Lucas Fourel who supervised this project at LSMS (EPFL) during the semester (Feb. 2023 - Aug. 2023), generated the data samples, and created a code base.
+- Data generated using Green-FFT method (Sainsot et al., 2011) by Dr. Lucas Fourel.
 - U-Net architecture inspired by Ronneberger et al. (2015)
 - Built with PyTorch, MLflow, and modern Python tooling
 
